@@ -1,0 +1,62 @@
+<!-- Vendor -->
+<script src="/proto/vendor/jquery/jquery.js"></script>
+<script src="/proto/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+<script src="/proto/vendor/popper/umd/popper.min.js"></script>
+<script src="/proto/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="/proto/vendor/common/common.js"></script>
+<script src="/proto/js/session.timeout.js?v=7"></script>
+
+<script src="/proto/js/theme.js?v=1"></script>
+
+<!-- Theme Custom -->
+<script src="/proto/js/custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/proto/js/theme.init.js"></script>
+
+
+<script>
+    $(function(){
+        $("#menu .nav-main li a").on("click",function(){
+            var main_index,child_index,index;
+            main_index = $(this).parent().parent().parent().index();
+            index = $(this).parent().index();
+            if( $(this).parent().parent().parent().parent().hasClass("nav-main") ){
+                main_index = $(this).parent().parent().parent().index();
+                child_index = "";
+            }else{
+                child_index = $(this).parent().parent().parent().index();
+                main_index = $(this).parent().parent().parent().parent().parent().index();
+            }
+            var info = {
+                main_index: main_index,
+                child_index: child_index,
+                index: index
+            };
+            localStorage.setItem('key', JSON.stringify(info));
+        });
+        //获取session值
+        var data = JSON.parse(localStorage.getItem('key'));  //获取localStorage保存的二级菜单id
+        $("#menu .nav-main > li").eq(data.main_index).addClass('nav-expanded');
+        if( data.child_index != "" ){
+            $("#menu .nav-main > li").eq(data.main_index).find(" > ul > li").eq(data.child_index).addClass('nav-expanded');
+            $("#menu .nav-main > li").eq(data.main_index).find(" > ul > li").eq(data.child_index).find(" > ul > li ").eq(data.index).addClass("active");
+        }else{
+            $("#menu .nav-main > li").eq(data.main_index).find(" > ul > li").eq(data.index).addClass("active");
+        }
+    })
+</script>
+
+<script src="/proto/vendor/select2/js/select2.js"></script>
+<script src="/proto/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/proto/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/dataTables.buttons.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.bootstrap4.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="/proto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
+<script src="/proto/vendor/pnotify/pnotify.custom.js"></script>
+<!-- Examples -->
+<script src="/proto/js/datatable.js?v=13"></script>

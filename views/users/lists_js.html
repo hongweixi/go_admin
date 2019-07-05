@@ -1,0 +1,97 @@
+<script>
+    $(function () {
+        InitDatatable("users")
+
+        $("#myModal").on("hidden.bs.modal",function(){
+            $("#myModal form .row input").val("");
+        });
+        //修改请求
+        $(document).on('click', '.recharge', function(){
+            $("#modify_permission").modal("show");
+            var user_id = $(this).attr('user_id');
+            $("#modify_permission .modal-content").load("/admin/user/recharge/"+user_id);
+        });
+
+
+        //确认
+        $("#modify_permission").on("click",".permission_submit",function(e){
+            e.preventDefault();
+            var data = $("#modify_permission .permission_form_modify").serialize();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/admin/recharge",
+                type: 'POST',
+                data: data,
+                success: function (data) {
+                    if (data.status != 1) {
+                        $(".tips").show().addClass("alert-danger");
+                        $(".tips span").html(data.message);
+                        setTimeout(function () {
+                            $(".tips").hide().removeClass("alert-danger");
+                            $(".tips span").html("");
+                        }, 2000);
+                    } else {
+                        $(".tips").show().addClass("alert-success");
+                        $(".tips span").html(data.message);
+                        setTimeout(function () {
+                            $(".tips").hide().removeClass("alert-success");
+                            $(".tips span").html("");
+                            location.reload();
+                        }, 2000);
+                    }
+                }
+            });
+        });
+
+        $(document).on("click",".upgrade", function (){
+
+            if(confirm("确认升级为代理吗？")){
+                var _this = $(this);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/admin/users/upgrade/" + _this.attr('user_id'),
+                    type: 'POST',
+                    data: {},
+                    success: function (data) {
+                        if (data.status == 1) {
+                            new PNotify({
+                                title: 'Success!',
+                                text: data.message,
+                                delay: 2000,
+                                type: 'success'
+                            });
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        }
+                        else {
+                            new PNotify({
+                                title: 'Error!',
+                                text: data.message,
+                                delay: 1000,
+                                type: 'error'
+                            });
+                        }
+                    },
+
+                    error: function (e) {
+                        if (e.readyState === 4 && e.status === 422) {
+                            for (var i in e.responseJSON) {
+                                new PNotify({
+                                    title: 'Error!',
+                                    delay: 1000,
+                                    text: e.responseJSON[i][0],
+                                    type: 'error'
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        })
+    });
+</script>

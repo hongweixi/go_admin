@@ -1,0 +1,115 @@
+
+<header class="page-header">
+    <h2>&nbsp;</h2>
+    <div class="right-wrapper text-left">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="/home">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>用户管理</span></li>
+            <li><span>用户列表</span></li>
+        </ol>
+    </div>
+</header>
+
+<!-- start: page -->
+<div class="row">
+    <div class="col-lg-12">
+        <form>
+            <section class="card">
+                <header class="card-header">
+                    <div class="card-actions">
+                        <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                    </div>
+                    <h2 class="card-title">筛选</h2>
+                </header>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 form-group ">
+                            <select class="form-control populate users_column_filter users_0"
+                                    data-column="0">
+                                <optgroup label="过滤选项">
+                                    <option value="0">过滤选项</option>
+                                    <option value="1">手机号</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 form-group">
+                            <input type="text" name="firstName" placeholder="过滤值"
+                                   class="form-control users_column_filter  users_1"
+                                   data-column="1">
+                        </div>
+
+                        {{/*<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 form-group">
+                            <select class="form-control populate users_column_filter  users_1"
+                                    data-column="1">
+                                <optgroup label="账户类型">
+                                    <option value="0">全部</option>
+                                    <option value="1">普通会员</option>
+                                    <option value="2">代理商</option>
+                                </optgroup>
+                            </select>
+                        </div>*/}}
+
+
+                    </div>
+                    <div class="row form-group">
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <section class="card">
+            <header class="card-header">
+                <div class="card-actions">
+                    <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                </div>
+
+                <h2 class="card-title">用户表</h2>
+            </header>
+            <div class="card-body ">
+                <table class="table table-bordered table-striped mb-0"
+                       id="users_table"
+                       width="100%"
+                       data-url="/users" data-role="admin_user" style="min-height:10rem;">
+                    <thead>
+                    <tr>
+                        <th>用户ID</th>
+                        <th>名字</th>
+                        <th>手机号</th>
+                        {{/*<th>余额</th>*/}}
+                        {{/*<th>账户类型</th>*/}}
+                        {{/*<th>账户星级</th>*/}}
+                        {{/*<th>上级</th>*/}}
+                        {{/*<th>注册日期</th>*/}}
+                        {{/*<th>账号状态</th>*/}}
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" id="modify_permission">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div class="alert tips">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <span></span>
+</div>
+
+
